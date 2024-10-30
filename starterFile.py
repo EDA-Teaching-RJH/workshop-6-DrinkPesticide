@@ -1,5 +1,3 @@
-#Your code goes here. 
-
 import math
 
 def safe_divide(a, b):
@@ -29,7 +27,7 @@ def process_list(input_list):
     The functionill take an input list;
     a Try-except block will handle Typeerrors and ValueErrors
     inputs: input_list
-    outputs: error report, output_list with elements removed.
+    outputs: error_list, output_list with elements removed.
     structure: try-except block in for loop
     """
     error_list = []
@@ -42,7 +40,7 @@ def process_list(input_list):
         except (ValueError):
             error_list.append(f"{x}, ValueError")
             pass
-            # silently skips these failures
+            # silently skips these failures but records the error into error_list
         except (TypeError):
             error_list.append(f"{x}, TypeError")
             pass
@@ -54,16 +52,57 @@ def process_list(input_list):
 
 def nested_operations(a, b):
     """
-    Converts both a and b to integers
-    divides a by b 
-    find the square root of the result
+    1. Converts both a and b to integers
+        Implement except ValueError to catch conversion issues
+    2. divides a by b 
+    3. find the square root of the result
     input: a / b
-    output: ValueError, ZeroDivisionError and sqrt(a/b)
+    output: ValueError message, ZeroDivisionError and c(sqrt(a/b))
     structure: nested try-except block
     """
-
-
+    try:
+        a = int(a)
+        b = int(b) 
+        try:
+            c = a/b
+        except ZeroDivisionError: 
+            c = 0
+            return f"You cannot divide any number by 0:\n {a}/{b} = error"
+    except ValueError:
+        # branch of loop catches ValueError exception
+        c = 0
+        return f"You entered non-integer numbers:\n {a}/{b} = error"
+    else:
+        return f"{a}/{b} = {c}"
+    
 def process_input():
-
+    """
+    1. Take input a from the user
+    2. try: block to convert input into a float and square it
+    3. except: block to handle value error and output the appropriate message
+    4. else: print result
+    5. finally: print "Processing complete" then output either the value of C
+    """
+    a = input("Please input an int or float: ")
+    try:
+        a = float(a)
+        # attempt to convert a
+        c = a*a
+        # attempts to execute arithmetic on converted a 
+    except ValueError:
+        output = f"Processing complete... \nInput: {a} is not a floating point :<"
+    else:
+        output = f"Processing complete... \n{a} to the power of 2 = {c}"
+    finally: 
+        return output
+    
+def main():
+    print(safe_divide(10, 2))
+    print(safe_divide(10, 0))
+    print(process_list([1, '2', 3, 'four', 5]))    
+    print(nested_operations(16, 4))
+    print(nested_operations(10, 0))
+    print(nested_operations('a', 5))
+    print(process_input())
 
 main()
