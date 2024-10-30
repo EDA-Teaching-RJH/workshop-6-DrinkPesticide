@@ -1,4 +1,6 @@
-error_list = [0, 1, 2]
-for x in error_list: 
+in_list = [0, 4, 2]
+error_list = []
+for x in in_list: 
+    print(x)
     error_list.append(f"{x}, error")
 print(error_list)
