@@ -1,20 +1,28 @@
-def safe_divide(a, b):
+def process_list(input_list):
     """
-    The function will take two variables as integers
-    The function will output their division
-    The function will use try except block to handle the ZeroDivisionError
-    input parameters: integers a and b
-    returns the quotient of a and b (c) or error messages
+    Multiple exception handling.
+    The functionill take an input list;
+    a Try-except block will handle Typeerrors and ValueErrors
+    inputs: input_list
+    outputs: error report, output_list with elements removed.
+    structure: try-except block in for loop
     """
-    i = 0
-    while True:
+    error_list = []
+    # list of indexes with their errors 
+    square_sum = 0 
+    for x in input_list: 
         try:
-            c = a/b
-        except ZeroDivisionError: 
-            print("Cannot divide by zero")
-            c = 0 
-            break
+            output = (input_list[x]^2)
+            # attempts to square the of element in input_list to an output_list.
+        except (ValueError):
+            error_list.append(f"{x}, ValueError")
+            pass
+            # silently skips these failures
+        except (TypeError):
+            error_list.append(f"{x}, TypeError")
+            pass
         else: 
-            break
-    return c
-print(safe_divide(3, 0))
+            error_list.append(f"{x}, Works")
+            # adds output to square_sum
+            square_sum = square_sum + output
+    return square_sum
